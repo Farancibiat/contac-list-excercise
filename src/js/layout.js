@@ -16,18 +16,6 @@ const Layout = () => {
 					<Route exact path="/">
 						<Home />
 					</Route>
-					<Route exact path="/#">
-						<Home />
-					</Route>
-					{/* <Route exact path="/characters/:uid">
-                        <Character id="uid" />
-                    </Route>
-                    <Route exact path="/vehicles/:uid">
-                        <Vehicle id="uid" />
-                    </Route>
-                    <Route exact path="/planets/:uid">
-                        <Planet id="uid" />
-                    </Route> */}
 				</Switch>
 			</ScrollToTop>
 		</BrowserRouter>
