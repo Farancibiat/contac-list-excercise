@@ -62,7 +62,9 @@
 	},
 	"dependencies": {
 		"bootstrap": "^5.0.0-beta3",
+		"bootstrap-icons": "^1.4.1",
 		"dotenv": "^8.2.0",
+		"formik": "^2.2.6",
 		"jquery": "^3.5.1",
 		"popper.js": "^1.16.1",
 		"prop-types": "^15.7.2",
@@ -71,6 +73,7 @@
 		"react-bootstrap": "^1.5.2",
 		"react-dom": "^16.14.0",
 		"react-polyfills": "0.0.1",
-		"react-router-dom": "^5.2.0"
+		"react-router-dom": "^5.2.0",
+		"yup": "^0.32.9"
 	}
 }
