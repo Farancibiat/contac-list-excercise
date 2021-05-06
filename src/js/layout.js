@@ -20,6 +20,9 @@ const Layout = () => {
 					<Route exact path="/newcontact">
 						<AddContact />
 					</Route>
+					<Route exact path="/modifycontact">
+						<AddContact />
+					</Route>
 				</Switch>
 			</ScrollToTop>
 		</BrowserRouter>

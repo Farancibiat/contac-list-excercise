@@ -16,10 +16,10 @@ export const ContactCard = data => {
 				/>
 			</div>
 			<div className="col-12 col-md-6 col-sm-4">
-				<p className="fs-5 my-2">{data.name}</p>
+				<p className="fs-5 my-2">{data.full_name}</p>
 				<p className="fs-6 text-secondary my-1">
 					<i className="fas fa-map-marker-alt pe-3"></i>
-					{data.dir}
+					{data.address}
 				</p>
 				<p className="fs-6 text-secondary my-1">
 					<i className="fas fa-phone pe-3"></i>
@@ -32,7 +32,9 @@ export const ContactCard = data => {
 			</div>
 			<div className="col-md-1 col-sm-4"></div>
 			<div className="col-12 col-md-2 col-sm-2 text-center">
-				<button className="btn">
+				<button
+					className="btn"
+					onClick={() => actions.startModify(data)}>
 					<i className="fas fa-pencil-alt"></i>
 				</button>
 				<button

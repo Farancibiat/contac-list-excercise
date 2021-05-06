@@ -2,14 +2,17 @@ import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { ContactCard } from "../component/contactCard";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 //create your first component
 
 export function Home() {
 	const { store, actions } = useContext(Context);
+
 	return (
 		<div className="container">
+			{/* Line to redirect to modify contact page */}
+			{store.redirect ? <Redirect to="/modifycontact" /> : ""}
 			{/* Here goes the pseudo-navbar with button  */}
 			<div className="row py-3">
 				<div className="col-sm-10"></div>
@@ -32,11 +35,12 @@ export function Home() {
 						return (
 							<>
 								<ContactCard
-									name={`${info.full_name}`}
+									full_name={`${info.full_name}`}
 									email={`${info.email}`}
-									dir={`${info.address}`}
+									address={`${info.address}`}
 									phone={`${info.phone}`}
 									id={`${info.id}`}
+									key={`${info.id}`}
 								/>
 							</>
 						);

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useFormik } from "formik";
 import { Link, Redirect } from "react-router-dom";
@@ -8,12 +8,17 @@ export function AddContact() {
 	const { store, actions } = useContext(Context);
 	const [redirect, setRedirect] = useState(false);
 	const phoneRegExp = /^(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}$/;
+
+	useEffect(() => {
+		actions.setRedirect(false);
+	}, []);
+
 	const formik = useFormik({
 		initialValues: {
-			full_name: "",
-			email: "",
-			phone: "",
-			address: ""
+			full_name: store.full_name,
+			email: store.email,
+			phone: store.phone,
+			address: store.address
 		},
 		validationSchema: Yup.object({
 			full_name: Yup.string().required("Full name is required"),
@@ -26,8 +31,16 @@ export function AddContact() {
 			address: Yup.string().required("Address is Required")
 		}),
 		onSubmit: values => {
-			actions.addContact(values);
-			setRedirect(true);
+			actions.setRedirect(false);
+			if (store.modifyContact) {
+				actions.modifyContact(values);
+				console.log("here comes the sun");
+				setRedirect(true);
+			} else {
+				actions.addContact(values);
+				setRedirect(true);
+				console.log("here not");
+			}
 		}
 	});
 
@@ -35,11 +48,11 @@ export function AddContact() {
 		<div className="container">
 			{redirect ? <Redirect to="/" /> : ""}
 			<div className="display-4 fw-bold text-center mt-4">
-				Add a new contact
+				{store.modifyContact ? "Modify Contact" : "Add a new contact"}
 			</div>
 			<form onSubmit={formik.handleSubmit}>
 				{/* Full Name input and error msg alternative*/}
-				<div clasName="row">
+				<div className="row">
 					<label
 						className="form-label fw-bold mt-2"
 						id="full_name"
@@ -56,7 +69,7 @@ export function AddContact() {
 						onBlur={formik.handleBlur}
 						value={formik.values.full_name}
 					/>
-					{formik.errors.full_name && touched.full_name ? (
+					{formik.errors.full_name && formik.touched.full_name ? (
 						<div className="bg-light text-danger mt-1">
 							*{formik.errors.full_name}
 						</div>
@@ -64,7 +77,7 @@ export function AddContact() {
 				</div>
 
 				{/* Email input and error msg alternative */}
-				<div clasName="row">
+				<div className="row">
 					<label
 						className="form-label fw-bold mt-2"
 						id="email"
@@ -81,7 +94,7 @@ export function AddContact() {
 						onBlur={formik.handleBlur}
 						value={formik.values.email}
 					/>
-					{formik.errors.email && touched.email? (
+					{formik.errors.email && formik.touched.email ? (
 						<div className="bg-light text-danger mt-1">
 							*{formik.errors.email}
 						</div>
@@ -89,7 +102,7 @@ export function AddContact() {
 				</div>
 
 				{/* Phone input and error msg alternative */}
-				<div clasName="row">
+				<div className="row">
 					<label
 						className="form-label fw-bold mt-2"
 						id="phone"
@@ -106,7 +119,7 @@ export function AddContact() {
 						onBlur={formik.handleBlur}
 						value={formik.values.phone}
 					/>
-					{formik.errors.phone && touched.phone? (
+					{formik.errors.phone && formik.touched.phone ? (
 						<div className="bg-light text-danger mt-1">
 							*{formik.errors.phone}
 						</div>
@@ -114,7 +127,7 @@ export function AddContact() {
 				</div>
 
 				{/* Address input and error msg alternative */}
-				<div clasName="row">
+				<div className="row">
 					<label
 						className="form-label fw-bold mt-2"
 						id="address"
@@ -130,7 +143,7 @@ export function AddContact() {
 						onChange={formik.handleChange}
 						value={formik.values.address}
 					/>
-					{formik.errors.address && touched.address ? (
+					{formik.errors.address && formik.touched.address ? (
 						<div className="bg-light text-danger mt-1">
 							*{formik.errors.address}
 						</div>
