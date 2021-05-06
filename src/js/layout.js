@@ -4,6 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 import injectContext from "./store/appContext";
 
 import { Home } from "./pages/home";
+import { AddContact } from "./component/addContact";
 
 const Layout = () => {
 	//the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -15,6 +16,9 @@ const Layout = () => {
 				<Switch>
 					<Route exact path="/">
 						<Home />
+					</Route>
+					<Route exact path="/newcontact">
+						<AddContact />
 					</Route>
 				</Switch>
 			</ScrollToTop>
